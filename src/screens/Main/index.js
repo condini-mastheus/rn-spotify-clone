@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 import {
   View, StatusBar, TouchableOpacity, Text, FlatList,
 } from 'react-native';
@@ -7,43 +7,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './styles';
 import AlbumItem from './components/AlbumItem';
-
-// const albums = [
-//   {
-//     songs: [
-//       {
-//         id: 0,
-//         title: 'Papercut',
-//         author: 'Linkin Park',
-//         file: 'https://s3-sa-east-1.amazonaws.com/gonative/1.mp3',
-//       },
-//       {
-//         id: 1,
-//         title: 'One Step Closer',
-//         author: 'Linkin Park',
-//         file: 'https://s3-sa-east-1.amazonaws.com/gonative/2.mp3',
-//       },
-//       {
-//         id: 2,
-//         title: 'With You',
-//         author: 'Linkin Park',
-//         file: 'https://s3-sa-east-1.amazonaws.com/gonative/3.mp3',
-//       },
-//       {
-//         id: 3,
-//         title: 'Points of Authority',
-//         author: 'Linkin Park',
-//         file: 'https://s3-sa-east-1.amazonaws.com/gonative/4.mp3',
-//       },
-//       {
-//         id: 4,
-//         title: 'Crawling',
-//         author: 'Linkin Park',
-//         file: 'https://s3-sa-east-1.amazonaws.com/gonative/5.mp3',
-//       },
-//     ],
-//   },
-// ];
 
 const albums = [
   {
@@ -324,7 +287,14 @@ export default class Main extends Component {
     ),
   });
 
+  static propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func,
+    }).isRequired,
+  };
+
   render() {
+    const { navigation } = this.props;
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor="#222" barStyle="light-content" />
@@ -332,7 +302,9 @@ export default class Main extends Component {
         <FlatList
           data={albums}
           keyExtractor={album => String(album.id)}
-          renderItem={({ item }) => <AlbumItem album={item} />}
+          renderItem={({ item }) => (
+            <AlbumItem album={item} onPress={() => navigation.navigate('Album', { album: item })} />
+          )}
         />
       </View>
     );
