@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: metrics.basePadding,
   },
+  loading: {
+    marginTop: metrics.baseMargin,
+  },
 });
 
 export default styles;

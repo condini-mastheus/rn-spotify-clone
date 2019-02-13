@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 
-import { View } from 'react-native';
+import {
+  View, ImageBackground, Text, FlatList,
+} from 'react-native';
 
-// import styles from './styles';
+import styles from './styles';
+
+import SongItem from '~/components/SongItem'
 
 export default class Album extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -12,6 +16,26 @@ export default class Album extends Component {
   state = {};
 
   render() {
-    return <View />;
+    const { album } = this.props.navigation.state.params;
+    return (
+      <View style={styles.container}>
+        <ImageBackground
+          style={styles.thumbnail}
+          source={{ uri: album.thumbnail }}
+          blurRadius={0.5}
+        >
+          <View style={styles.thumbnailContent}>
+            <Text style={styles.title}>{album.title}</Text>
+            <Text style={styles.author}>{album.author}</Text>
+          </View>
+        </ImageBackground>
+
+        <FlatList
+          data={album.songs}
+          keyExtractor={song => String(song.id)}
+          renderItem={({ item }) => <SongItem song={item} />}
+        />
+      </View>
+    );
   }
 }

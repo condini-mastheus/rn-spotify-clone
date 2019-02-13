@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux';
 
+import albums from './albums';
+import search from './search';
+
 export default combineReducers({
-  e: (state = {}) => state,
+  albums,
+  search,
 });
