@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, TextInput, FlatList, ActivityIndicator } from 'react-native';
+import {
+  View, TextInput, ActivityIndicator,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { debounce } from 'lodash';
@@ -9,7 +11,7 @@ import { Creators as SearchActions } from '~/store/ducks/search';
 
 import styles from './styles';
 
-import SongItem from '~/components/SongItem';
+import SongList from '~/components/SongList';
 
 class Search extends Component {
   static navigationOptions = {
@@ -64,15 +66,13 @@ class Search extends Component {
           />
         </View>
 
-        {search.isLoading 
+        {search.isLoading
           && (
             <ActivityIndicator size="small" color="#999" style={styles.loading} />
           )}
 
-        <FlatList
+        <SongList
           data={search.data}
-          keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => <SongItem song={item} />}
         />
       </View>
     );

@@ -17,6 +17,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
   },
+  active: {
+    color: colors.success,
+  },
   author: {
     color: colors.dark,
     fontSize: 14,

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 
-import {
-  View, ImageBackground, Text, FlatList,
-} from 'react-native';
+import { View, ImageBackground, Text } from 'react-native';
 
 import styles from './styles';
 
-import SongItem from '~/components/SongItem'
+import SongList from '~/components/SongList';
 
 export default class Album extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -30,11 +28,7 @@ export default class Album extends Component {
           </View>
         </ImageBackground>
 
-        <FlatList
-          data={album.songs}
-          keyExtractor={song => String(song.id)}
-          renderItem={({ item }) => <SongItem song={item} />}
-        />
+        <SongList data={album.songs} />
       </View>
     );
   }
